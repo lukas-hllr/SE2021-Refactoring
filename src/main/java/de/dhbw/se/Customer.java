@@ -27,7 +27,7 @@ class Customer {
         while (enum_rentals.hasMoreElements()) {
             Rental each = enum_rentals.nextElement();
             //show figures for this rental
-            result += String.format("\t%s\t\t%d\t\t%.1f\n", each.getMovie().getTitle(), each.getDaysRented(), each.getPrice());
+            result += String.format("\t%s\t\t%d\t\t%.1f\n", each.getMovie().getTitle(), each.getDaysRented(), each.getMoviePrice());
         }
         //add footer lines
         result += String.format("Amount owed is %.1f\n", getTotalCharge());
@@ -47,10 +47,10 @@ class Customer {
 
     private double getTotalCharge() {
         double result = 0;
-        Enumeration rentals = this.rentals.elements();
+        Enumeration<Rental> rentals = this.rentals.elements();
         while (rentals.hasMoreElements()) {
-            Rental each = (Rental) rentals.nextElement();
-            result += each.getPrice();
+            Rental each = rentals.nextElement();
+            result += each.getMoviePrice();
         }
         return result;
     }
