@@ -1,23 +1,23 @@
 package de.dhbw.se;
 
-import java.lang.*;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Vector;
 
 class Customer {
     private final String name;
     private final Vector<Rental> rentals = new Vector<>();
 
-    public Customer (String name) {
+    public Customer(String name) {
         this.name = name;
-    };
+    }
 
     public void addRental(Rental rental) {
         rentals.addElement(rental);
-    };
+    }
 
-    public String getName () {
+    public String getName() {
         return name;
-    };
+    }
 
     public String getStatement() {
         Enumeration<Rental> enum_rentals = rentals.elements();
