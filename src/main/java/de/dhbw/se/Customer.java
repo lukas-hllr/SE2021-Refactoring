@@ -20,22 +20,31 @@ class Customer {
     };
 
     public String getStatement() {
-        int frequentRenterPoints = 0;
         Enumeration<Rental> enum_rentals = rentals.elements();
         String result = String.format("Rental Record for %s\n", this.getName());
         result += "\tTitle\t\tDays\tAmount\n";
 
         while (enum_rentals.hasMoreElements()) {
-            Rental each = (Rental) enum_rentals.nextElement();
-            frequentRenterPoints += each.getFrequentRenterPoints();
+            Rental each = enum_rentals.nextElement();
             //show figures for this rental
             result += String.format("\t%s\t\t%d\t\t%.1f\n", each.getMovie().getTitle(), each.getDaysRented(), each.getPrice());
         }
         //add footer lines
         result += String.format("Amount owed is %.1f\n", getTotalCharge());
-        result += String.format("You earned %d frequent renter points", frequentRenterPoints);
+        result += String.format("You earned %d frequent renter points", getTotalFrequentRenterPoints());
         return result;
     }
+
+    private int getTotalFrequentRenterPoints() {
+        int result = 0;
+        Enumeration<Rental> rentals = this.rentals.elements();
+        while (rentals.hasMoreElements()) {
+            Rental each = rentals.nextElement();
+            result += each.getFrequentRenterPoints();
+        }
+        return result;
+    }
+
     private double getTotalCharge() {
         double result = 0;
         Enumeration rentals = this.rentals.elements();
