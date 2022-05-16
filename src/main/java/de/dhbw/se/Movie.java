@@ -12,8 +12,8 @@ public class Movie {
 	public int getPriceCode() {
 		return this.priceCode;
 	}
-	public void setPriceCode(int pricecode) {
-		this.priceCode = pricecode;
+	public void setPriceCode(int priceCode) {
+		this.priceCode = priceCode;
 	}
 	public String getTitle () {
 		return this.title;
