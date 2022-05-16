@@ -1,22 +1,40 @@
 package de.dhbw.se;
+
+import de.dhbw.se.price.ChildrenPrice;
+import de.dhbw.se.price.NewReleasePrice;
+import de.dhbw.se.price.Price;
+import de.dhbw.se.price.RegularPrice;
+
 public class Movie {
 	public static final int CHILDREN = 2;
 	public static final int REGULAR = 0;
 	public static final int NEW_RELEASE = 1;
 	private final String title;
-	private int priceCode;
+	private Price price;
 
 	public Movie(String title, int priceCode) {
 		this.title = title;
-		this.priceCode = priceCode;
+		this.setPriceCode(priceCode);
 	}
 
 	public int getPriceCode() {
-		return this.priceCode;
+		return price.getPriceCode();
 	}
 
 	public void setPriceCode(int priceCode) {
-		this.priceCode = priceCode;
+		switch (priceCode) {
+			case REGULAR:
+				price = new RegularPrice();
+				break;
+			case CHILDREN:
+				price = new ChildrenPrice();
+				break;
+			case NEW_RELEASE:
+				price = new NewReleasePrice();
+				break;
+			default:
+				throw new IllegalArgumentException("PriceCode not found!");
+		}
 	}
 
 	public String getTitle () {
